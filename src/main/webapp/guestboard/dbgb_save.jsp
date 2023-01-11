@@ -36,6 +36,8 @@
 
 <!-- 변수에 넘어오는 값을 SQL 퀄리에 담아서 DB에 저장  -->
 <%
+
+
 String sql = null;    //sql <== SQL 쿼리를 담는 변수 
 Statement stmt = null; 	//SQL 쿼리를 DB에 적용하는 객체 
 
@@ -43,15 +45,17 @@ Statement stmt = null; 	//SQL 쿼리를 DB에 적용하는 객체
  //Connection 객체의  conn.createStatement() 메소드를 써서  stmt 객체에 할당. 
 stmt = conn.createStatement(); 
 
+try {
 sql = "insert into guestboard (name, email,inputdate,subject,content) ";
 sql = sql + "values ('" + na + "','" + em + "', '" + ymd + "', '" + sub+ "','" + cont+"')"; 
 
- out.println(sql); 
+// out.println(sql); 
 
-int cnt = 0 ; //sql 쿼리가 잘 처리되었는지 확인 변수 
+//int cnt = 0 ; //sql 쿼리가 잘 처리되었는지 확인 변수 
 
 //Statement 객체가 sql 쿼리를 싨행해서 DB에 저장 
-cnt = stmt.executeUpdate(sql);       //Statement 객체의 excuteUpdate(sql) : insert, update, delete
+//cnt = stmt.executeUpdate(sql);       //Statement 객체의 excuteUpdate(sql) : insert, update, delete
+stmt.executeUpdate(sql); 
 //stmt.executeQuery(sql);        //Statement 객체의 excuteQuery(sql) : select 
 									//Recordset 객체로 리턴을 시켜줌 : select 한 결과를 담은 객체 
 
@@ -59,20 +63,36 @@ cnt = stmt.executeUpdate(sql);       //Statement 객체의 excuteUpdate(sql) : i
  		// 저장할 경우 commit 는 자동으로 처리됨  
  //
 									
-out.println(cnt); 
+//out.println(cnt); 
 
-if ( cnt > 0 ) {
-	out.println ("DB에 잘 insert 되었습니다."); 
-}else {
-	out.println ("DB에 저장을 실패 했습니다. "); 
+//if ( cnt > 0 ) {
+//	out.println ("DB에 잘 insert 되었습니다."); 
+//}else {
+//	out.println ("DB에 저장을 실패 했습니다. "); 
+//}
+
+} catch (Exception e){
+	out.println ("DataBase Insert 중 문제가 발생 되었습니다. <p/>"); 
+	out.println ("고객센터 : 02-1111-1111 로 문의 바랍니다"); 
+	e.printStackTrace();
+	
+}finally {
+	//사용한  객체를 close()  // Connection , Statement 객체 메모리에서 제거
+	if (conn != null){
+		conn.close(); 
+	}
+	if (stmt != null) {
+		stmt.close();
+	}
+	
 }
+
+//dbgb_save.jsp : 폼에서 받은 값을 DB에 저장이 완료되면 출력 페이지로 이동 
+
 									
 %>
 
-
-
-
-
+<jsp:forward page = "dbgb_show02.jsp" />
 
 
     

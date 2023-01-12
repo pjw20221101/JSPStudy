@@ -12,7 +12,7 @@
 <% request.setCharacterEncoding("UTF-8");  %>
 
 <!-- DB를 접속하는 파일을 include 해서 사용  -->
-<%@ include file = "conn_oracle.jsp" %>
+<%@ include file = "conn_mssql.jsp" %>
 
 <!-- 폼에서 넘겨주는 변수와 값을 받아서 저장: request.getParameter("변수명");  -->
 <%
@@ -92,7 +92,7 @@ stmt.executeUpdate(sql);
 									
 %>
 
-<jsp:forward page = "dbgb_show02.jsp" />
+<jsp:forward page = "dbgb_show.jsp" />
 
 
     

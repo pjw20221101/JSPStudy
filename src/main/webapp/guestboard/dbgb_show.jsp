@@ -5,7 +5,7 @@
 <%@ page import = "java.sql.*, java.util.*" %>
 
 <!-- DB의 값을 select 해서 select 한 값을 출력  -->
-<%@ include file="conn_oracle.jsp" %>
+<%@ include file="conn_mssql.jsp" %>
     
 <!DOCTYPE html>
 <html>

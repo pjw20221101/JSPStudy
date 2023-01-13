@@ -94,11 +94,24 @@
 	
 	//go 변수 를 넘겨 받아서 wheregroup, startpage, endpage 정보를 알아낼 수 있다. 
 		//코드 블락
+	if (request.getParameter("go") != null ){   // freeboard_list03.jsp?go=3
+		where = Integer.parseInt(request.getParameter("go"));  // go 변수의 값을 where변수에 할당
+		wheregroup = (where - 1) / maxpages + 1 ;  //현재 내가 속한 그룹을 알수 있다.
+		startpage = (wheregroup - 1) * maxpages +1 ; 
+		endpage = startpage + maxpages -1 ; 
 	
-	
+		
 	//gogroup 변수를 넘겨 받아서 startpage, endpage, where 의 정보를 알아낼 수 있다. 
 		//코드 블락 
-		
+	}else if (request.getParameter("gogroup") != null){  //freeboard_list03.jsp?gogroup= 
+		wheregroup = Integer.parseInt(request.getParameter("gogroup"));  //현재내가 위치한 그룹
+		startpage = (wheregroup - 1) * maxpages +1 ; 
+		where = startpage; 
+		endpage = startpage + maxpages -1;  
+	}
+	
+	int nextgroup = wheregroup +1 ; 
+	int priorgroup = wheregroup -1 ; 
 	
 	int nextpage = where + 1 ;    // where : 현재 내가 위치한 페이지
 	int priorpage = where -1 ; 
@@ -188,11 +201,11 @@
 	%>
 
   <tr>
-  	<td><%=  %> </td>
-  	<td><a href="freeboard_read.jsp?id=<%=  %>"> <%=  %> </a> </td>
-  	<td><%=  %> </td>
-  	<td><%=  %> </td>
-  	<td><%=  %> </td>
+  	<td> <%= keyid.elementAt(j) %> </td>
+  	<td><a href="freeboard_read.jsp?id="> <%= subject.elementAt(j) %>  </a> </td>
+  	<td> <%= name.elementAt(j) %></td>
+  	<td> <%= inputdate.elementAt(j) %></td>
+  	<td> <%= readcount.elementAt(j) %></td>
   </tr>
   
   <%
@@ -225,7 +238,7 @@
 			if (jj == where) {		//jj 가 자신의 페이지 번호라면 링크 없이 출력
 				out.println ("["+jj+"]"); 
 			}else {		//jj가 현재 자신의 페이지 번호가 아니라면 링크를 걸어서 출력
-				out.println ("[<a href=freeborad_list03.jsp?go="+ jj + ">" +jj+ "</a>]");
+				out.println ("[<a href=freeboard_list03.jsp?go="+ jj + ">" +jj+ "</a>]");
 			}
 		}
 	}
@@ -233,7 +246,7 @@
 	// [다음][마지막]
 	if (wheregroup < totalgroup ) {  //링크를 처리
 		out.println ("[<A href=freeboard_list03.jsp?gogroup="+ nextgroup + ">다음</A>]"); 
-		out.println ("[<A href=freeboard_list03.jsp?gogroup="+ totalgroup + ">마지막</A>"); 
+		out.println ("[<A href=freeboard_list03.jsp?gogroup="+ totalgroup + ">마지막]</A>"); 
 	}else {  // 마지막 페이지에 왔을때 링크를 해지 
 		out.println ("[다음]"); 
 		out.println ("[마지막]"); 

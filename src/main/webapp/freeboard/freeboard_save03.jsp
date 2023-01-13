@@ -10,7 +10,6 @@
 
 <!-- form에서 넘어오는 데이터는 모두 String 으로 넘온다. 
 	Integer.perseInt() 
-	Double.perseDouble()
  -->
  
  <!-- form에서 넘어오는 변수의 값을 받아서 새로운 변수에 할당  -->
@@ -35,12 +34,12 @@
 	//DB에 값을 처리할 변수 선언 : Connection (conn) <== Include 되어 있음. 
 	String sql = null; 
 	Statement stmt = null; 
+	PreparedStatement pstmt = null; 
 	ResultSet rs = null;       //id 컬럼의 최대값을 select 
 	
 	
 	try {
 	//DB에서 값을 처리 
-	
 	
 	stmt = conn.createStatement(); 
 	sql = "select max(id) from freeboard"; 	//id : Primary Kety 
@@ -64,18 +63,33 @@
 	//폼에서 넘겨받은 값을 DB에 insert 하는 쿼리 (주의 : masterid : id컬럼에 들어오는 값으로 처리해야함)
 	sql = "insert into freeboard (id, name, password, email, "; 
 	sql += "subject,content, inputdate, masterid,readcount,replaynum,step ) " ;		
-	sql += "values ( " + id + " , '" + na + "','"+ pw + "', '" + em +"', '" + sub +"', '" + cont +"', " ;
-	sql += "'" + ymd + "', " +  id + "," + "0 , 0 , 0)";
+	sql += "values ( ?,?,?,?,?,?,?,?," ;
+	sql +=  "0 , 0 , 0)";
+	
+	//PreparedStatement 객체 생성
+		//객체 생성시 sql 구문을 넣는다. 
+	pstmt = conn.prepareStatement(sql);
+	
+	//?에 변수값을 할당 
+	pstmt.setInt(1, id);		//int  
+	pstmt.setString(2, na);
+	pstmt.setString(3, pw);
+	pstmt.setString(4, em);
+	pstmt.setString(5, sub);
+	pstmt.setString(6, cont);
+	pstmt.setString(7, ymd);
+	pstmt.setInt(8, id);		//int 
+	
+	pstmt.executeUpdate();    
 	
 	//out.println (sql); 
 	//if (true) return ; 			//프로그램을 중지 시킴. 디버깅할때 사용함. 
 	
-	stmt.executeUpdate(sql);  //DB 저장 완료 , commit 을 자동으로 처리 
+	//stmt.executeUpdate(sql);  //DB 저장 완료 , commit 을 자동으로 처리 
 	
 	}catch (Exception e) {
 		out.println("예상치 못한 오류가 발생했습니다. <p/>" ); 
 		out.println("고객 센터 : 02-1111-1111 <p/>" ); 
-		// e.printStackTrace();
 		
 	}finally {
 		if ( conn != null) conn.close(); 
@@ -95,7 +109,7 @@
  <% // response.sendRedirect("freeboard_list.jsp"); %>
  
  
- <jsp:forward page = "freeboard_list.jsp" />
+ <jsp:forward page = "freeboard_list03.jsp" />
 
 
 

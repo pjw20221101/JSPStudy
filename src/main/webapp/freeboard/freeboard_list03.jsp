@@ -202,7 +202,7 @@
 
   <tr>
   	<td> <%= keyid.elementAt(j) %> </td>
-  	<td><a href="freeboard_read.jsp?id=<%= keyid.elementAt(j) %>"> <%= subject.elementAt(j) %>  </a> </td>
+  	<td><a href="freeboard_read.jsp?id=<%= keyid.elementAt(j) %>&page=<%= where %>"> <%= subject.elementAt(j) %>  </a> </td>
   	<td> <%= name.elementAt(j) %></td>
   	<td> <%= inputdate.elementAt(j) %></td>
   	<td> <%= readcount.elementAt(j) %></td>

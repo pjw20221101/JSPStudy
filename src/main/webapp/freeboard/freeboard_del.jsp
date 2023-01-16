@@ -60,7 +60,7 @@
    					<table width = "100%" border = "0" cellpadding = "4" cellspacing = "4"> 
    						<tr> <td width ="84%"> &nbsp; </td>
    							<td width = "8%"> 
-   								<a href = "freeboard_list.jsp" > 
+   								<a href = "freeboard_list03.jsp?go=<%= request.getParameter("page") %>" > 
    									<img src = "image/list.jpg" width="48" height="19" border="0">
    								</a>
    							</td>

@@ -101,7 +101,7 @@
 	 %>
 			  
 		
-   <table width="600" border="0" cellpadding="0" cellspacing="5">
+   <table width="600" border="0" cellpadding="0" cellspacing="5" align="center">
 	<tr> 
 		<td align="right" width="450"><A href="freeboard_list03.jsp?go=<%= request.getParameter("page") %>"><img src="image/list.jpg" border=0></a></td>
 		<td width="70" align="right"><A href="freeboard_rwrite.jsp?id=<%= request.getParameter("id") %>&page=<%= request.getParameter("page") %>"> <img src="image/reply.jpg" border=0></A></td>

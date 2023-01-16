@@ -40,7 +40,7 @@
    				<b> 글 삭제 하기</b> </td>
    			</tr>
    			<tr>
-   				<td clospan = "2" bgcolor = "#1F4F8F" height="1"> </td>
+   				<td colspan = "2" bgcolor = "#1F4F8F" height="1"> </td>
    			</tr>
    			<tr>
    				<td width ="124" height= "30" bgcolor= "#f4f4f4" align ="center" class= "input_style1">

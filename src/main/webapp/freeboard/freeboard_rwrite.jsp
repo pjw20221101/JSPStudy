@@ -80,11 +80,6 @@ function check(){
 		out.println (rnum + "<p/>"); 
 		*/
 		 // if (true) return;  //프로그램 중지 
-
-	
-	
-	
-	
 	
 %>
 

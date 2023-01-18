@@ -134,7 +134,7 @@ if (true) return;
  
  <%	
  	//페이징 처리 
- 	 Vector name=new Vector();
+ Vector name=new Vector();
  Vector inputdate=new Vector();
  Vector email=new Vector();
  Vector subject=new Vector();
@@ -191,7 +191,7 @@ if (true) return;
  	sql += " order by id desc" ; 
  
  	
- 	// out.println (sql);
+ 	 out.println (sql);
  	
  	/*
  	if (true) return; 

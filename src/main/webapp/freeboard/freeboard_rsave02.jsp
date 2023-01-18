@@ -27,10 +27,9 @@
 				// 처음글, 답변글일때 
 	int rnum= Integer.parseInt(request.getParameter("rnum")); 
 		//DB : replaynum
-			//처음글 : 0   , 답변글 : 1,  답변글의답변 : 2, 답변글의 답변글의 답변 : 3
 	int step= Integer.parseInt(request.getParameter("step"));
 		//DB : step  : 글의 깊이를 처리하는 컬럼 
-			// 답변글에대한 순번 : 0,1,2
+			// 처음글 : 0   , 답변글 : 1,  답변글의답변 : 2, 답변글의 답변글의 답변 : 3
 	
 	//날짜를 한국 포멧에 맞도록 변환해서 저장함. 
 	java.util.Date yymmdd = new java.util.Date();
@@ -95,18 +94,31 @@
 	
 	//모든 변수가 처리된 내용을 DB에 저장 함 
 	
-	//Statement 객체로 처리 
+	//PreparedStatement 객체로 처리 
 	sql = "insert into freeboard (id, name, password, email,subject, ";
 	sql += "content, inputdate, masterid, readcount, replaynum, step) ";
-	sql += "values (" + id + ", '" + na + "','" + pw + "','" + em  ;
-	sql += "', '" + sub + "','" + cont + "','"+ ymd + "'," + mid ; 
-	sql += ",0," + rnum + ","+ step + ")";
+	sql += "values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
 	
-	 // out.println (sql); 
+	//pstmt 객체 생성 
+	pstmt = conn.prepareStatement(sql); 
 	
-	//
+	//pstmt 에 ? 변수값을 넣음. 
+	pstmt.setInt(1, id)	; 	
+	pstmt.setString(2, na); 		
+	pstmt.setString(3, pw);
+	pstmt.setString(4, em);
+	pstmt.setString(5, sub);
+	pstmt.setString(6, cont);
+	pstmt.setString(7, ymd);
+	pstmt.setInt(8, mid)	; 
+	pstmt.setInt(9, 0)	; 
+	pstmt.setInt(10, rnum); 
+	pstmt.setInt(11, step)	; 
+	
+	//pstmt 실행 
+
 	int result = 0 ;   // 0 : insert 실패 , 1 : insert 성공  
-	result = stmt.executeUpdate(sql); 
+	result = pstmt.executeUpdate(); 
 	
 	/* 
 	if ( result >= 1){
@@ -114,7 +126,7 @@
 	} else {
 		out.println ("DB 에 Insert 가 실패 되었습니다 "); 
 	}
-	*/ 
+	*/
 	
 	
 	//PreparedStatement 처리 

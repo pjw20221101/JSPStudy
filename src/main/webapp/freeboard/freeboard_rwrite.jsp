@@ -87,7 +87,7 @@ function check(){
 <P>
 
 
-  <FORM name='msgrewrite'  method=POST action="freeboard_rsave.jsp">
+  <FORM name='msgrewrite'  method=POST action="freeboard_rsave02.jsp">
    <table width="600" cellspacing="0" cellpadding="2" align="center">
     <tr> 
      <td colspan="2" bgcolor="#1F4F8F" height="1"></td>
@@ -151,6 +151,7 @@ function check(){
    <INPUT type="hidden" name="step" value="<%=step%>">
    <INPUT type="hidden" name="mid" value="<%=mid%>">
    <INPUT type="hidden" name="rnum" value="<%=rnum%>">
+   <INPUT type="hidden" name="page" value="<%= request.getParameter("page") %>">
   </FORM>
 <%
 	}   //if else  의 마지막 블락 

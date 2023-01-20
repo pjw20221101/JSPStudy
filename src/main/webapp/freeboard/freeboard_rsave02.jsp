@@ -115,6 +115,7 @@
 	pstmt.setInt(10, rnum); 
 	pstmt.setInt(11, step)	; 
 	
+	
 	//pstmt 실행 
 
 	int result = 0 ;   // 0 : insert 실패 , 1 : insert 성공  
